@@ -1,0 +1,9 @@
+{
+	"name": "fuck",
+	"description": "fuck",
+	"version": "0.0.1",
+	"dependencies": {
+		"monk": "*",
+		"bson": "*"
+	}
+}

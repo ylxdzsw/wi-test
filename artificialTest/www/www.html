@@ -1,0 +1,80 @@
+<head>
+	<title>人工审核|语料处理</title>
+</head>
+
+<body>
+	<div class="container">
+		{{> loading}}
+		<div class="col-sm-8 col-xs-12">
+			{{> metadata}}
+			{{> verify}}
+		</div>
+		<div class="col-sm-4 col-xs-12">
+			{{> sidepanel}}
+		</div>
+	</div>
+</body>
+
+<template name="metadata">
+	<form class="metadata" onsubmit="return false;">
+	<div class="row">
+		<label for="username">审核员：</label>
+		<input type="text" name="username" id="username" placeholder="Your Name" value="{{ username }}" />
+	</div>
+	</form>
+</template>
+
+<template name="verify">
+	<form class="verify" onsubmit="return false;">
+		<div class="row">
+			<label for="sentence">中文：</label>
+			<textarea name="sentence" id="sentence">{{ sentence }}</textarea>
+			<label for="sentence">拼音：</label>
+			<textarea name="pinyin" id="pinyin">{{ pinyin }}</textarea>
+			<div class="btn-group" role="group">
+				<button value="reject" id="reject" class="btn btn-danger">舍弃</button>
+				<button value="skip" id="skip" class="btn btn-warning">跳过</button>
+				<button value="submit" id="submit" class="btn btn-success">提交</button>
+			</div>
+		</div>
+	</form>
+</template>
+
+<template name="sidepanel">
+	<div id="sidepanel" role="tabpanel">
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#progress" aria-controls="progress" role="tab" data-toggle="tab">当前进度</a>
+			</li>
+			<li role="presentation">
+				<a href="#rank" aria-controls="rank" role="tab" data-toggle="tab">贡献排行</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div id="progress" role="tabpanel" class="tab-pane active">
+				{{#each categories}}
+					<span>{{ name }}</span>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" aria-valuenow="{{ now }}" aira-valuemin="0" aira-valuemax="{{ total }}">
+							{{ ratio }}
+						</div>
+					</div>
+				{{/each}}
+			</div>
+			<div id="rank" role="tabpanel" class="tab-pane">
+				{{#each contributors}}
+					<div>
+						<span>{{ username }}</span>
+						<span class="right">{{ contribution }}</span>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="loading">
+	{{#if loading}}
+		{{> spinner}}
+	{{/if}}
+</template>
