@@ -13,6 +13,14 @@ import io
 
 seperators = (',','，','。','！','？','.','!','?',';','；') # \n不加在里面是因为材料本身的问题：从web上直接用复制的话会有多余的换行符
 
+def rectify():
+	pypinyin.load_single_dict({
+		ord('的'):'de,di',
+		ord('地'):'de,di',
+		ord('了'):'le,liao'
+	})
+
+
 def read(fin): #分句
 	sin = fin.read()
 	line = ""
@@ -55,6 +63,8 @@ def asterisk(word):
 #########
 
 if __name__ == '__main__':
+	rectify()
+
 	fin   = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
 	fout  = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 	
