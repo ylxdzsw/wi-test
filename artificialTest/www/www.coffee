@@ -41,14 +41,7 @@ if Meteor.isClient
 			do goNext
 
 	Template.sidepanel.helpers
-		"categories": ->
-			for x in Session.get('categories')
-				left = Corpus.find({status:"unchecked",category:x.id}).count()
-				console.log left
-				name: x.name
-				now: x.total - left
-				total: x.total
-				ratio: "#{x.total - left}/#{x.total}"
+		"progress": -> Session.get 'progress'
 		"contributors": ->
 			x = _.groupBy Corpus.find().fetch(), (x) -> x.checkedBy
 			y = for k,v of x
@@ -70,6 +63,7 @@ if Meteor.isClient
 		"change #font-setting-DroidSansMono": -> Session.set 'fontSetting', 'DroidSansMono'
 		"change #font-setting-Consolas": -> Session.set 'fontSetting', 'Consolas'
 		"change #font-setting-Menlo": -> Session.set 'fontSetting', 'Menlo'
+		"click #sync": -> do updateProgress
 
 	Template.loading.helpers
 		"loading": -> Session.get 'loading'
@@ -85,7 +79,18 @@ if Meteor.isClient
 			
 			Session.set 'categories', Session.get('categories').map (x) -> x.total = Corpus.find({category:x.id}).count(); x # Stupid Mongodb has no GroupBy
 			Session.set 'loading', false
+			do updateProgress
 			do goNext
+
+	updateProgress = -> # auto sync will decrease performence significantly
+		temp = for x in Session.get('categories')
+			left = Corpus.find({status:"unchecked",category:x.id}).count()
+			name: x.name
+			now: x.total - left
+			total: x.total
+			ratio: "#{x.total - left}/#{x.total}"
+			portion: (x.total - left)/x.total * 100
+		Session.set 'progress', temp
 
 	Session.set 'categories', [ # use session to store this to enable reactive refreshing
 		{id:"1",name:"自然科学"},

@@ -17,7 +17,8 @@ def rectify():
 	pypinyin.load_single_dict({
 		ord('的'):'de,di',
 		ord('地'):'de,di',
-		ord('了'):'le,liao'
+		ord('了'):'le,liao',
+		ord('着'):'zhe,zhuo'
 	})
 
 
