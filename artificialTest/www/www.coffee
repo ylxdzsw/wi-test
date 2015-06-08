@@ -42,12 +42,13 @@ if Meteor.isClient
 
 	Template.sidepanel.helpers
 		"categories": ->
-			Session.get('categories').map (x) ->
-				now = Corpus.find({categories:x.id,status:"unchecked"}).count()
+			for x in Session.get('categories')
+				left = Corpus.find({status:"unchecked",category:x.id}).count()
+				console.log left
 				name: x.name
-				now: now
+				now: x.total - left
 				total: x.total
-				ratio: "#{now}/#{x.total}"
+				ratio: "#{x.total - left}/#{x.total}"
 		"contributors": ->
 			x = _.groupBy Corpus.find().fetch(), (x) -> x.checkedBy
 			y = for k,v of x
