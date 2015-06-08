@@ -30,7 +30,7 @@
 			<label for="sentence">中文：</label>
 			<textarea name="sentence" id="sentence">{{ sentence }}</textarea>
 			<label for="sentence">拼音：</label>
-			<textarea name="pinyin" id="pinyin">{{ pinyin }}</textarea>
+			<textarea name="pinyin" id="pinyin" class="font-{{ fontSetting }}">{{ pinyin }}</textarea>
 			<div class="btn-group" role="group">
 				<button value="reject" id="reject" class="btn btn-danger">舍弃</button>
 				<button value="skip" id="skip" class="btn btn-warning">跳过</button>
@@ -48,6 +48,9 @@
 			</li>
 			<li role="presentation">
 				<a href="#rank" aria-controls="rank" role="tab" data-toggle="tab">贡献排行</a>
+			</li>
+			<li role="presentation">
+				<a href="#setting" aria-controls="setting" role="tab" data-toggle="tab">UI设定</a>
 			</li>
 		</ul>
 		<div class="tab-content">
@@ -68,6 +71,39 @@
 						<span class="right">{{ contribution }}</span>
 					</div>
 				{{/each}}
+			</div>
+			<div id="setting" role="tabpanel" class="tab-pane">
+				<p>
+				<span>色彩主题</span>
+				<label class="radio-inline">
+					<input type="radio" name="color-theme" id="color-theme-white" value="color-theme-white" checked> 白色
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="color-theme" id="color-theme-black" value="color-theme-black"> 黑色
+				</label>
+				</p><p>
+				<span>字体</span>
+				<div class="radio">
+					<label>
+						<input type="radio" name="font-setting" id="font-setting-default" value="font-setting-default" checked> 默认
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="font-setting" id="font-setting-DroidSansMono" value="font-setting-DroidSansMono"> Droid Sans Mono (Linux)
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="font-setting" id="font-setting-Consolas" value="font-setting-Consolas"> Consolas (Windows)
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="font-setting" id="font-setting-Menlo" value="font-setting-Menlo"> Menlo (OS X)
+					</label>
+				</div>
+				</p>
 			</div>
 		</div>
 	</div>

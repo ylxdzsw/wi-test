@@ -3,7 +3,9 @@ body {
 }
 
 textarea {
-	width: 100%
+	width: 100%;
+	font-size: large;
+	height: 150px;
 }
 
 h2 {
@@ -13,6 +15,7 @@ h2 {
 #sidepanel {
 	padding: 4px;
 	border: thin solid #ddd;
+	margin-top: 53px;
 }
 
 .progress-bar {
@@ -21,4 +24,56 @@ h2 {
 
 .right {
 	text-align: right;
+}
+
+.black {
+	background-color: #666;
+
+	textarea {
+		background-color: #444;
+		color: #BBB;
+	}
+
+	input[type="text"] {
+		background-color: #444;
+		color: #BBB;
+		border-color: #444;
+	}
+
+	label {
+		color: #DDD;
+	}
+
+	span {
+		color: #DDD;
+	}
+
+	a[role='tab'] {
+		color: #DDD;
+	}
+
+	li.active[role='presentation']>a {
+		color: lime;
+		background-color: inherit;
+	}
+
+	.progress {
+		background-color: #888;
+	}
+}
+
+.font-default {
+	font-family: monospace;
+}
+
+.font-DroidSansMono {
+	font-family: "Droid Sans Mono" monospace;
+}
+
+.font-Consolas {
+	font-family: "Consolas" monospace;
+}
+
+.font-Menlo {
+	font-family: "Menlo" monospace;
 }

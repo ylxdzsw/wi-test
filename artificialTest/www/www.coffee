@@ -16,7 +16,8 @@ if Meteor.isClient
 	Template.verify.helpers
 		"sentence": -> Session.get('current')?.sentence
 		"pinyin": -> Session.get('current')?.pinyin
-
+		"fontSetting": -> Session.get('fontSetting')
+	
 	Template.verify.events
 		"click #reject": (e) ->
 			return alert("请输入你的名字") if not Session.get 'username'
@@ -54,6 +55,20 @@ if Meteor.isClient
 				contribution: v.length
 
 			_.sortBy(y,(x)->x.contribution).reverse()
+
+	Template.sidepanel.events
+		"change #color-theme-white": ->
+			$('body')
+				.removeClass 'black'
+				.addClass 'white'
+		"change #color-theme-black": ->
+			$('body')
+				.removeClass 'white'
+				.addClass 'black'
+		"change #font-setting-default": -> Session.set 'fontSetting', 'default'
+		"change #font-setting-DroidSansMono": -> Session.set 'fontSetting', 'DroidSansMono'
+		"change #font-setting-Consolas": -> Session.set 'fontSetting', 'Consolas'
+		"change #font-setting-Menlo": -> Session.set 'fontSetting', 'Menlo'
 
 	Template.loading.helpers
 		"loading": -> Session.get 'loading'
