@@ -48,7 +48,7 @@ if Meteor.isClient
 				username: k
 				contribution: v.length
 
-			_.sortBy(y,(x)->x.contribution).reverse()
+			_.sortBy(y,(x)->x.contribution).filter((x)->x.contribution?).reverse()
 
 	Template.sidepanel.events
 		"change #color-theme-white": ->
